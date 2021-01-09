@@ -87,10 +87,10 @@ router.delete('/users/me', auth, async (req, res) => {
 const uploads = multer({
     limits: {
         fileSize: 1000000 // 1 MB, in bytes
-    }, 
+    },
     fileFilter(req, file, cb) {
 
-        if(!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             cb(new Error("Only jpg, jpeg and png image formats are allowed."))
         }
 
@@ -108,11 +108,11 @@ router.post("/user/me/avatar", auth, uploads.single("avatar"), async (req, res) 
         req.user.avatar = buffer
         await req.user.save()
         res.send()
-    } catch(e) {
+    } catch (e) {
         console.log(e)
         res.status(500).send()
     }
-    
+
 }, (error, req, res, next) => {
     res.status(400).send({ error: error.message })
 })
@@ -127,14 +127,14 @@ router.get("/user/:id/avatar", async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
 
-        if(!user || !user.avatar) {
+        if (!user || !user.avatar) {
             throw new Error()
         }
 
         res.set("Content-Type", "image/png")
 
         res.send(user.avatar)
-    } catch(e) {
+    } catch (e) {
         res.status(404).send()
     }
 })

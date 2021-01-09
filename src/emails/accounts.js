@@ -8,11 +8,7 @@ const sendWelcomeEmail = (name, email) => {
 		from: "mk3051458@yopmail.com",
 		subject: "Welcome to Task Manager",
 		text: `Welcome to the app ${name}. Let me know how you get along with the app.`,
-	
-	}).then(() => {
-		console.log("Email sent.")
-	}).catch(e => {
-		console.log("Error", e )
+
 	})
 }
 
